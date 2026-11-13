@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerchio Druidico Insubre - Spiritualità e Natura</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cinzel & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        druid: {
+                            bg: '#fdfbf7',
+                            card: '#f5f1e8',
+                            cardHover: '#ede7d9',
+                            darkGreen: '#13281c',
+                            green: '#20422c',
+                            sage: '#6b9080',
+                            lightSage: '#dbe4de',
+                            gold: '#b89241',
+                            goldHover: '#9c7931',
+                            textDark: '#1a221d',
+                            textMuted: '#526056'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fdfbf7;
+            color: #1a221d;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(19, 40, 28, 0.75) 0%, rgba(19, 40, 28, 0.88) 100%), url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-druid-sage selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-druid-darkGreen text-druid-lightSage text-xs sm:text-sm py-2 px-4 text-center border-b border-druid-green/50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-2">
+            <span class="hidden sm:inline-block"><i class="fa-solid fa-leaf text-druid-gold mr-2"></i>Associazione Spirituale e Culturale di Promozione Sociale</span>
+            <span class="mx-auto sm:mx-0">Prossima Celebrazione: <strong class="text-white font-cinzel tracking-wider">Solstizio d'inverno</strong> - 21 Dicembre</span>
+            <a href="#eventi" class="hidden md:inline-block text-druid-gold hover:underline font-medium">Scopri di più <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-[#fff0cf] border-b border-druid-green/10 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+            <!-- Brand Logo using User Image -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="h-16 sm:h-20 flex items-center justify-center">
+                    <img src="images/logo.png" alt="Cerchio Druidico Insubre" class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/240x80/fefae0/13281c?text=Cerchio+Druidico+Insubre';">
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium text-druid-textDark">
+                <a href="#chi-siamo" class="hover:text-druid-sage transition-colors py-1">Chi Siamo</a>
+                <a href="#tradizione" class="hover:text-druid-sage transition-colors py-1">Tradizione Insubre</a>
+                <a href="#eventi" class="hover:text-druid-sage transition-colors py-1">Eventi & Feste</a>
+                <a href="#progetti" class="hover:text-druid-sage transition-colors py-1">Eco-Spiritualità</a>
+                <a href="#articoli" class="hover:text-druid-sage transition-colors py-1">Articoli</a>
+                <a href="#sostienici" class="hover:text-druid-sage transition-colors py-1">Sostienici</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden sm:flex items-center space-x-3">
+                <button onclick="openModal('modal-contatti')" class="px-4 py-2 text-sm font-medium text-druid-darkGreen border border-druid-green/30 rounded-lg hover:bg-druid-card transition-colors">
+                    Contatti
+                </button>
+                <button onclick="openModal('modal-adesione')" class="px-4 py-2 text-sm font-medium text-white bg-druid-green rounded-lg shadow hover:bg-druid-darkGreen transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-hands-holding-circle text-xs"></i>
+                    <span>Unisciti a noi</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 text-druid-darkGreen focus:outline-none" aria-label="Menu">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-[#fff0cf] border-b border-druid-green/20 px-4 pt-2 pb-6 space-y-3">
+            <a href="#chi-siamo" class="block py-2 text-druid-textDark hover:text-druid-sage font-medium border-b border-druid-card">Chi Siamo</a>
+            <a href="#tradizione" class="block py-2 text-druid-textDark hover:text-druid-sage font-medium border-b border-druid-card">Tradizione Insubre</a>
+            <a href="#eventi" class="block py-2 text-druid-textDark hover:text-druid-sage font-medium border-b border-druid-card">Eventi & Feste</a>
+            <a href="#progetti" class="block py-2 text-druid-textDark hover:text-druid-sage font-medium border-b border-druid-card">Eco-Spiritualità</a>
+            <a href="#articoli" class="block py-2 text-druid-textDark hover:text-druid-sage font-medium border-b border-druid-card">Articoli & Blog</a>
+            <a href="#sostienici" class="block py-2 text-druid-textDark hover:text-druid-sage font-medium border-b border-druid-card">Sostienici & Tesseramento</a>
+            <div class="pt-2 flex flex-col space-y-2">
+                <button onclick="openModal('modal-adesione')" class="w-full py-2 text-center text-white bg-druid-green rounded-lg font-medium">Unisciti a Noi</button>
+                <button onclick="openModal('modal-contatti')" class="w-full py-2 text-center text-druid-darkGreen border border-druid-green/30 rounded-lg font-medium">Contattaci</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative hero-gradient text-white py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="max-w-4xl mx-auto text-center space-y-6 relative z-10">
+                <div class="inline-flex items-center space-x-2 bg-druid-green/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-druid-sage/40 text-druid-lightSage text-xs sm:text-sm font-medium uppercase tracking-widest">
+                    <i class="fa-solid fa-tree text-druid-gold"></i>
+                    <span>Comunità Neopagana & Druidica dell'Insubria</span>
+                </div>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-cinzel font-bold tracking-tight text-amber-50 leading-tight drop-shadow-md">
+                    In Armonia con la Natura,<br>Custodi del Sacro Insubre
+                </h1>
+                <p class="text-base sm:text-lg text-stone-200 font-light max-w-2xl mx-auto leading-relaxed">
+                    Riscopriamo e celebriamo le antiche radici celtiche, l'eco-spiritualità e la venerazione della Terra nella regione geografica e storica dell'Insubria.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#chi-siamo" class="w-full sm:w-auto px-8 py-3.5 bg-druid-gold hover:bg-druid-goldHover text-druid-darkGreen font-semibold rounded-lg shadow-lg transition-all transform hover:-translate-y-0.5 text-center">
+                        La Nostra Missione
+                    </a>
+                    <a href="#eventi" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg backdrop-blur-md border border-white/20 transition-all text-center">
+                        Partecipa ai Rituali
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Bottom decorative curve -->
+            <div class="absolute bottom-0 left-0 right-0 h-10 bg-druid-bg [clip-path:polygon(0_100%,100%_100%,100%_0)]"></div>
+        </section>
+
+        <!-- Chi Siamo Section -->
+        <section id="chi-siamo" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-druid-sage font-cinzel text-sm font-semibold uppercase tracking-widest">Spiritualità Radicata nel Territorio</span>
+                <h2 class="text-3xl sm:text-4xl font-cinzel font-bold text-druid-darkGreen">Chi Siamo & La Nostra Visione</h2>
+                <div class="w-16 h-1 bg-druid-gold mx-auto rounded-full"></div>
+                <p class="text-druid-textMuted text-base pt-2">
+                    Il Cerchio Druidico Insubre è un'associazione non-profit dedita allo studio, alla pratica e alla salvaguardia della tradizione druidica neopagana e del patrimonio storico-ambientale dell'Insubria.
+                </p>
+            </div>
+
+            <!-- 3 Pillar Cards -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-druid-card rounded-2xl p-8 border border-druid-green/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-druid-green/10 text-druid-green flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-hands-praying"></i>
+                        </div>
+                        <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Neopaganesimo e Druidismo</h3>
+                        <p class="text-druid-textMuted text-sm leading-relaxed">
+                            Onoriamo il divino immanente nella Natura. Attraverso lo studio dei simboli, dei cicli stagionali e della filosofia antica, coltiviamo la crescita interiore e la saggezza spirituale.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-druid-green/10">
+                        <span class="text-xs font-semibold text-druid-sage uppercase tracking-wider">Pilastro Culturale</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-druid-card rounded-2xl p-8 border border-druid-green/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-druid-green/10 text-druid-green flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Eco-Spiritualità Attiva</h3>
+                        <p class="text-druid-textMuted text-sm leading-relaxed">
+                            Per noi la Terra è sacra. Non ci limitiamo alla venerazione simbolica: promuoviamo la riforestazione, la tutela dei boschi e progetti di sostenibilità concreta nel nostro territorio.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-druid-green/10">
+                        <span class="text-xs font-semibold text-druid-sage uppercase tracking-wider">Azione Ecologica</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-druid-card rounded-2xl p-8 border border-druid-green/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-druid-green/10 text-druid-green flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-mountain-sun"></i>
+                        </div>
+                        <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Eredità Celtico-Insubre</h3>
+                        <p class="text-druid-textMuted text-sm leading-relaxed">
+                            Riscopriamo le radici storico-archeologiche dei popoli Insubri che abitarono i territori compresi tra il Po e le Prealpi, rivalorizzando i luoghi sacri naturali (Nemetos).
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-druid-green/10">
+                        <span class="text-xs font-semibold text-druid-sage uppercase tracking-wider">Memoria Storica</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tradizione Insubre Banner Section -->
+        <section id="tradizione" class="bg-druid-darkGreen text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-druid-gold font-cinzel text-sm font-semibold uppercase tracking-widest">Identità Celtica del Territorio</span>
+                    <h2 class="text-3xl sm:text-4xl font-cinzel font-bold leading-tight">Che cos'è l'Insubria Sacra?</h2>
+                    <p class="text-druid-lightSage text-sm sm:text-base leading-relaxed">
+                        L'Insubria è l'antica regione storica dell'Italia nord-occidentale abitata dagli Insubri, popolazione celtica insediatasi tra i fiumi Ticino e Adda, con centro sacrale presso Mediolanum (l'attuale Milano).
+                    </p>
+                    <p class="text-druid-lightSage text-sm sm:text-base leading-relaxed">
+                        Per il nostro Cerchio, l'Insubria è una geografia dell'anima: tra querce secolari, corsi d'acqua montani e rilievi prealpini, studiamo la cultura celtica locale integrando storia, folklore lombardo-piemontese e rispetto per gli ecosistemi.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="border-l-2 border-druid-gold pl-4">
+                            <span class="block font-cinzel text-2xl font-bold text-druid-gold">Nemetoi</span>
+                            <span class="text-xs text-druid-lightSage">Boschi Sacri Protetti</span>
+                        </div>
+                        <div class="border-l-2 border-druid-gold pl-4">
+                            <span class="block font-cinzel text-2xl font-bold text-druid-gold">8 Feste</span>
+                            <span class="text-xs text-druid-lightSage">La Ruota dell'Anno Celtica</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="aspect-video sm:aspect-square rounded-2xl overflow-hidden shadow-2xl border border-druid-sage/30">
+                        <img src="https://images.unsplash.com/photo-1511497584788-8767611136f6?auto=format&fit=crop&w=1000&q=80" alt="Bosco Incantato dell'Insubria" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-druid-card text-druid-darkGreen p-6 rounded-2xl shadow-xl hidden sm:block max-w-xs border border-druid-green/20">
+                        <p class="font-cinzel text-xs font-bold uppercase text-druid-sage">Motto dell'Associazione</p>
+                        <p class="font-cinzel text-sm font-semibold italic mt-1">"Natura est Altare Nostrum" - La Natura è il Nostro Altare</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eventi & Feste della Ruota dell'Anno -->
+        <section id="eventi" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-druid-sage font-cinzel text-sm font-semibold uppercase tracking-widest">Calendario Ritualistico & Incontri</span>
+                <h2 class="text-3xl sm:text-4xl font-cinzel font-bold text-druid-darkGreen">Feste della Ruota dell'Anno & Eventi</h2>
+                <div class="w-16 h-1 bg-druid-gold mx-auto rounded-full"></div>
+                <p class="text-druid-textMuted text-base">
+                    Celebriamo i grandi solstizi, gli equinozi e le quattro feste celtiche stagionali (Samhain, Imbolc, Beltane, Lughnasadh) in cerchi aperti ai soci ed agli appassionati.
+                </p>
+            </div>
+
+            <!-- Event Category Tabs -->
+            <div class="flex justify-center mb-8 overflow-x-auto pb-2">
+                <div class="inline-flex p-1 bg-druid-card rounded-xl border border-druid-green/10 space-x-1">
+                    <button onclick="filterEvents('all')" id="tab-all" class="event-tab active px-5 py-2 text-sm font-medium rounded-lg bg-druid-green text-white shadow-sm transition-all">Tutti gli Eventi</button>
+                    <button onclick="filterEvents('festa')" id="tab-festa" class="event-tab px-5 py-2 text-sm font-medium rounded-lg text-druid-textMuted hover:text-druid-darkGreen transition-all">Feste Stagionali</button>
+                    <button onclick="filterEvents('workshop')" id="tab-workshop" class="event-tab px-5 py-2 text-sm font-medium rounded-lg text-druid-textMuted hover:text-druid-darkGreen transition-all">Laboratori & Workshop</button>
+                    <button onclick="filterEvents('ecologia')" id="tab-ecologia" class="event-tab px-5 py-2 text-sm font-medium rounded-lg text-druid-textMuted hover:text-druid-darkGreen transition-all">Giornate Ecologiche</button>
+                </div>
+            </div>
+
+            <!-- Events Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="events-grid">
+                <!-- Event 1 -->
+                <div class="event-card festa bg-druid-card rounded-2xl overflow-hidden border border-druid-green/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80" alt="Alban Elued" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-druid-darkGreen/90 text-druid-gold text-xs font-cinzel px-3 py-1 rounded-full backdrop-blur-md">Festa Stagionale</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs font-semibold text-druid-sage flex items-center space-x-2">
+                                <i class="fa-regular fa-calendar"></i>
+                                <span>21 Settembre 2026 • 16:30</span>
+                            </div>
+                            <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Alban Elued (Equinozio d'Autunno)</h3>
+                            <p class="text-druid-textMuted text-sm line-clamp-3">
+                                Rituale aperto di ringraziamento per i frutti della Terra e riequilibrio delle forze di luce ed ombra. Incontro nei boschi del Parco del Ticino.
+                            </p>
+                            <div class="text-xs text-druid-textMuted flex items-center pt-2">
+                                <i class="fa-solid fa-location-dot text-druid-gold mr-1.5"></i> Parco del Ticino (VA)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="openEventModal('Alban Elued (Equinozio d\'Autunno)', '21 Settembre 2026', 'Parco del Ticino (VA)', 'Celebrazione del secondo raccolto e dell\'equilibrio autunnale. Portare un\'offerta biodegradabile (fiori, mele o cereali).')" class="w-full py-2.5 text-center text-sm font-medium text-druid-green bg-druid-green/10 hover:bg-druid-green hover:text-white rounded-lg transition-colors">
+                            Dettagli & Prenotazione
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="event-card festa bg-druid-card rounded-2xl overflow-hidden border border-druid-green/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=600&q=80" alt="Samhain" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-druid-darkGreen/90 text-druid-gold text-xs font-cinzel px-3 py-1 rounded-full backdrop-blur-md">Festa Stagionale</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs font-semibold text-druid-sage flex items-center space-x-2">
+                                <i class="fa-regular fa-calendar"></i>
+                                <span>31 Ottobre - 1 Novembre 2026</span>
+                            </div>
+                            <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Samhain: Il Capodanno Celtico</h3>
+                            <p class="text-druid-textMuted text-sm line-clamp-3">
+                                La notte in cui il velo tra i mondi si assottiglia. Cerchio di memoria degli Antenati, condivisione di storie attorno al fuoco e banchetto sacro.
+                            </p>
+                            <div class="text-xs text-druid-textMuted flex items-center pt-2">
+                                <i class="fa-solid fa-location-dot text-druid-gold mr-1.5"></i> Bosco di Vanzago (MI)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="openEventModal('Samhain: Capodanno Celtico', '31 Ottobre 2026', 'Bosco Sacro di Vanzago', 'Il rito della notte di Samhain celebra l\'inizio del semestre scuro. Incontro riservato su prenotazione previo raggiungimento del numero massimo.')" class="w-full py-2.5 text-center text-sm font-medium text-druid-green bg-druid-green/10 hover:bg-druid-green hover:text-white rounded-lg transition-colors">
+                            Dettagli & Prenotazione
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="event-card workshop bg-druid-card rounded-2xl overflow-hidden border border-druid-green/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1546842931-886c185b4c8c?auto=format&fit=crop&w=600&q=80" alt="Herbalism Workshop" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-druid-sage text-white text-xs font-cinzel px-3 py-1 rounded-full backdrop-blur-md">Workshop</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="text-xs font-semibold text-druid-sage flex items-center space-x-2">
+                                <i class="fa-regular fa-calendar"></i>
+                                <span>15 Novembre 2026 • 10:00 - 17:00</span>
+                            </div>
+                            <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Botanica Sacra & Erboristeria Druidica</h3>
+                            <p class="text-druid-textMuted text-sm line-clamp-3">
+                                Corso pratico sul riconoscimento delle erbe officinali prealpine, la preparazione di oleoliti tradizionali e il valore simbolico degli alberi Insubri.
+                            </p>
+                            <div class="text-xs text-druid-textMuted flex items-center pt-2">
+                                <i class="fa-solid fa-location-dot text-druid-gold mr-1.5"></i> Sede Associativa, Como
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="openEventModal('Workshop Erboristeria Sacra', '15 Novembre 2026', 'Como (CO)', 'Laboratorio teorico-pratico. Include dispensa ed essenze preparate durante il workshop.')" class="w-full py-2.5 text-center text-sm font-medium text-druid-green bg-druid-green/10 hover:bg-druid-green hover:text-white rounded-lg transition-colors">
+                            Dettagli & Prenotazione
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progetti Ambientali e Sociali -->
+        <section id="progetti" class="bg-druid-card py-20 px-4 sm:px-6 lg:px-8 border-y border-druid-green/10">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-druid-sage font-cinzel text-sm font-semibold uppercase tracking-widest">Azione Concreta nel Territorio</span>
+                    <h2 class="text-3xl sm:text-4xl font-cinzel font-bold text-druid-darkGreen">Progetti Ambientali & Eco-Spiritualità</h2>
+                    <div class="w-16 h-1 bg-druid-gold mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Project Item 1 -->
+                    <div class="bg-druid-bg p-8 rounded-2xl border border-druid-green/10 shadow-sm flex flex-col sm:flex-row gap-6 items-start">
+                        <div class="w-16 h-16 rounded-2xl bg-druid-green/10 text-druid-green flex-shrink-0 flex items-center justify-center text-3xl">
+                            <i class="fa-solid fa-tree"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Progetto "Custodi del Nemetos"</h3>
+                            <p class="text-druid-textMuted text-sm leading-relaxed">
+                                Individuiamo e proteggiamo aree boschive ad alto valore biodiversistico in Lombardia e Piemonte orientali, pulendole dai rifiuti e favorendo la flora autoctona.
+                            </p>
+                            <span class="inline-block text-xs font-semibold text-druid-green bg-druid-lightSage/50 px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-check mr-1"></i> 12 Ettari Monitorati
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project Item 2 -->
+                    <div class="bg-druid-bg p-8 rounded-2xl border border-druid-green/10 shadow-sm flex flex-col sm:flex-row gap-6 items-start">
+                        <div class="w-16 h-16 rounded-2xl bg-druid-green/10 text-druid-green flex-shrink-0 flex items-center justify-center text-3xl">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-cinzel font-bold text-druid-darkGreen">Biblioteca e Archivi Insubri</h3>
+                            <p class="text-druid-textMuted text-sm leading-relaxed">
+                                Raccolta e digitalizzazione di testi, saggi storico-archeologici e leggende popolari legate al paganesimo e alle tradizioni pre-cristiane del nord Italia.
+                            </p>
+                            <span class="inline-block text-xs font-semibold text-druid-green bg-druid-lightSage/50 px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-check mr-1"></i> Oltre 350 Volumi Catalogati
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articoli / Blog Section -->
+        <section id="articoli" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div class="space-y-3">
+                    <span class="text-druid-sage font-cinzel text-sm font-semibold uppercase tracking-widest">Conoscenza & Filosofia</span>
+                    <h2 class="text-3xl sm:text-4xl font-cinzel font-bold text-druid-darkGreen">Ultimi Articoli & Notizie</h2>
+                    <div class="w-16 h-1 bg-druid-gold rounded-full"></div>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="article-search" placeholder="Cerca negli articoli..." oninput="filterArticles()" class="w-full pl-10 pr-4 py-2.5 bg-druid-card border border-druid-green/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-druid-sage">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-druid-sage text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid md:grid-cols-3 gap-8" id="articles-container">
+                <!-- Article 1 -->
+                <article class="article-item bg-druid-card rounded-2xl overflow-hidden border border-druid-green/10 shadow-sm flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between text-xs text-druid-sage">
+                            <span>Simbologia Celtica</span>
+                            <span>10 Agosto 2026</span>
+                        </div>
+                        <h3 class="article-title text-lg font-cinzel font-bold text-druid-darkGreen hover:text-druid-sage transition-colors">
+                            <a href="/blog/triskell-tre-spirali/">La Triskell e le Tre Spirali dell'Esistenza</a>
+                        </h3>
+                        <p class="text-druid-textMuted text-sm leading-relaxed">
+                            Analisi del simbolo triscele presente anche nel nostro logo: significato cosmologico tra Terra, Mare e Cielo nell'Insubria antica.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-druid-green/5 flex items-center justify-between text-xs font-semibold text-druid-green">
+                        <span>Tempo di lettura: 5 min</span>
+                        <a href="/blog/triskell-tre-spirali/" class="hover:text-druid-sage">Leggi <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-item bg-druid-card rounded-2xl overflow-hidden border border-druid-green/10 shadow-sm flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between text-xs text-druid-sage">
+                            <span>Botanica Druidica</span>
+                            <span>28 Luglio 2026</span>
+                        </div>
+                        <h3 class="article-title text-lg font-cinzel font-bold text-druid-darkGreen hover:text-druid-sage transition-colors">
+                            <a href="/blog/quercia-sacra/">La Quercia Sacra: Simbolo di Forza e Connessione</a>
+                        </h3>
+                        <p class="text-druid-textMuted text-sm leading-relaxed">
+                            Perché la Quercia era considerata l'albero maestro dai Druidi. Proprietà botaniche, miti lombardi e tutela delle querce secolari.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-druid-green/5 flex items-center justify-between text-xs font-semibold text-druid-green">
+                        <span>Tempo di lettura: 7 min</span>
+                        <a href="/blog/quercia-sacra/" class="hover:text-druid-sage">Leggi <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-item bg-druid-card rounded-2xl overflow-hidden border border-druid-green/10 shadow-sm flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between text-xs text-druid-sage">
+                            <span>Storia Insubre</span>
+                            <span>14 Giugno 2026</span>
+                        </div>
+                        <h3 class="article-title text-lg font-cinzel font-bold text-druid-darkGreen hover:text-druid-sage transition-colors">
+                            <a href="/blog/druidi-golasecca/">I Druidi e Golasecca: Tra Archeologia e Fede</a>
+                        </h3>
+                        <p class="text-druid-textMuted text-sm leading-relaxed">
+                            Come i reperti della Cultura di Golasecca testimoniano la complessa spiritualità celtico-insubre prima della romanizzazione.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 pt-2 border-t border-druid-green/5 flex items-center justify-between text-xs font-semibold text-druid-green">
+                        <span>Tempo di lettura: 9 min</span>
+                        <a href="/blog/druidi-golasecca/" class="hover:text-druid-sage">Leggi <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center mt-10">
+                <a href="/blog/" class="inline-flex items-center gap-2 px-6 py-3 bg-druid-green hover:bg-druid-darkGreen text-white font-semibold rounded-lg shadow transition-colors">
+                    Vai al blog <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Supporto, Tesseramento e Donazioni -->
+        <section id="sostienici" class="bg-druid-darkGreen text-white py-20 px-4 sm:px-6 lg:px-8 relative">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-druid-gold font-cinzel text-sm font-semibold uppercase tracking-widest">Sostieni il Cerchio</span>
+                    <h2 class="text-3xl sm:text-4xl font-cinzel font-bold leading-tight">Diventa Socio o Fai una Donazione</h2>
+                    <p class="text-druid-lightSage text-sm sm:text-base leading-relaxed">
+                        Il Cerchio Druidico Insubre si sostiene unicamente tramite le quote associative ed i contributi volontari di chi condivide i nostri valori di rispetto per la Natura e riscoperta della tradizione.
+                    </p>
+                    <ul class="space-y-3 text-sm text-druid-lightSage">
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-druid-gold"></i>
+                            <span>Partecipazione prioritaria a tutti i rituali e workshop stagionali</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-druid-gold"></i>
+                            <span>Accesso alla Biblioteca e Archivio Digitale Insubre</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-druid-gold"></i>
+                            <span>Sostegno diretto ai progetti di piantumazione e pulizia boschi</span>
+                        </li>
+                    </ul>
+                    <div class="pt-2 flex flex-wrap gap-4">
+                        <button onclick="openModal('modal-adesione')" class="px-6 py-3 bg-druid-gold hover:bg-druid-goldHover text-druid-darkGreen font-bold rounded-lg transition-colors">
+                            Richiedi il Tesseramento
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Donation Widget -->
+                <div class="bg-druid-bg text-druid-textDark p-8 rounded-2xl shadow-xl border border-druid-sage/30 space-y-6">
+                    <h3 class="text-2xl font-cinzel font-bold text-druid-darkGreen">Calcolatore Donazione Volontaria</h3>
+                    <p class="text-xs text-druid-textMuted">Seleziona la tua donazione per contribuire all'acquisto di alberi autoctoni da piantumare:</p>
+
+                    <!-- Presets -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="setDonation(15, this)" class="don-btn border-2 border-druid-green text-druid-green py-2 rounded-lg font-bold hover:bg-druid-green hover:text-white transition-all">15 €</button>
+                        <button onclick="setDonation(30, this)" class="don-btn active border-2 border-druid-green bg-druid-green text-white py-2 rounded-lg font-bold hover:bg-druid-green hover:text-white transition-all">30 €</button>
+                        <button onclick="setDonation(50, this)" class="don-btn border-2 border-druid-green text-druid-green py-2 rounded-lg font-bold hover:bg-druid-green hover:text-white transition-all">50 €</button>
+                    </div>
+
+                    <!-- Impact Output -->
+                    <div class="bg-druid-card p-4 rounded-xl border border-druid-green/10 text-center space-y-1">
+                        <span class="text-xs text-druid-textMuted uppercase font-semibold">Il tuo impatto:</span>
+                        <div id="impact-text" class="text-lg font-cinzel font-bold text-druid-green">
+                            Pianti <span class="text-druid-gold">2 Querce</span> e proteggi 50 mq di bosco
+                        </div>
+                    </div>
+
+                    <button onclick="handleDonationSubmit()" class="w-full py-3 bg-druid-green hover:bg-druid-darkGreen text-white font-bold rounded-lg shadow transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-heart text-druid-gold"></i>
+                        <span>Dona ora con PayPal o Carte</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-druid-darkGreen text-druid-lightSage border-t border-druid-green/30 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Col 1: Brand -->
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center space-x-3">
+                        <div class="h-10 overflow-hidden rounded bg-[#fefae0] p-1 flex items-center justify-center">
+                            <img src="images/logo.png" alt="Logo Cerchio Druidico Insubre" class="h-full w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/180x60/fefae0/13281c?text=Cerchio+Druidico+Insubre';">
+                        </div>
+                    </div>
+                    <p class="text-xs text-druid-lightSage/80 leading-relaxed">
+                        Associazione di promozione sociale per la valorizzazione del neopaganesimo, del druidismo e della tutela ambientale in Insubria.
+                    </p>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="space-y-3">
+                    <h4 class="font-cinzel text-sm font-bold text-white uppercase tracking-wider">Esplora</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#chi-siamo" class="hover:text-druid-gold transition-colors">Chi Siamo</a></li>
+                        <li><a href="#tradizione" class="hover:text-druid-gold transition-colors">Tradizione Insubre</a></li>
+                        <li><a href="#eventi" class="hover:text-druid-gold transition-colors">Ruota dell'Anno</a></li>
+                        <li><a href="#progetti" class="hover:text-druid-gold transition-colors">Eco-Spiritualità</a></li>
+                        <li><a href="/blog/" class="hover:text-druid-gold transition-colors">Blog & Notizie</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contacts -->
+                <div class="space-y-3">
+                    <h4 class="font-cinzel text-sm font-bold text-white uppercase tracking-wider">Contatti & Sede</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><i class="fa-solid fa-envelope mr-2 text-druid-gold"></i> info@cerchiodruidicoinsubre.it</li>
+                        <li><i class="fa-solid fa-location-dot mr-2 text-druid-gold"></i> Regione Insubria (Lombardia/Piemonte)</li>
+                        <li><i class="fa-solid fa-shield-halved mr-2 text-druid-gold"></i> C.F. 98123450129</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter -->
+                <div class="space-y-3">
+                    <h4 class="font-cinzel text-sm font-bold text-white uppercase tracking-wider">Newsletter Sacra</h4>
+                    <p class="text-xs text-druid-lightSage/80">Ricevi notifiche per i rituali e i solstizi:</p>
+                    <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                        <input type="email" required placeholder="La tua email..." class="w-full px-3 py-2 bg-druid-green/50 border border-druid-sage/30 rounded text-xs text-white placeholder-druid-lightSage/50 focus:outline-none focus:border-druid-gold">
+                        <button type="submit" class="w-full py-2 bg-druid-gold hover:bg-druid-goldHover text-druid-darkGreen font-bold text-xs rounded transition-colors">
+                            Iscriviti
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-druid-green/30 text-center text-xs text-druid-lightSage/60 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 Cerchio Druidico Insubre. Tutti i diritti riservati.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook text-base"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram text-base"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-youtube text-base"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-adesione" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-druid-bg rounded-2xl max-w-lg w-full p-6 sm:p-8 border border-druid-green/20 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-adesione')" class="absolute top-4 right-4 text-druid-textMuted hover:text-druid-darkGreen">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-cinzel font-bold text-druid-darkGreen">Richiesta di Adesione</h3>
+            <p class="text-xs text-druid-textMuted">Compila il modulo per richiedere l'iscrizione all'Associazione Cerchio Druidico Insubre.</p>
+            <form onsubmit="handleFormSubmit(event, 'Richiesta di adesione inviata con successo! Ti contatteremo presto per il colloquio conoscitivo.')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-druid-darkGreen mb-1">Nome e Cognome</label>
+                    <input type="text" required class="w-full px-3 py-2 bg-druid-card border border-druid-green/20 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-druid-sage">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-druid-darkGreen mb-1">Email</label>
+                    <input type="email" required class="w-full px-3 py-2 bg-druid-card border border-druid-green/20 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-druid-sage">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-druid-darkGreen mb-1">Città / Provincia</label>
+                    <input type="text" placeholder="es. Varese, Como, Milano..." required class="w-full px-3 py-2 bg-druid-card border border-druid-green/20 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-druid-sage">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-druid-darkGreen mb-1">Motivazione dell'Interesse</label>
+                    <textarea rows="3" required placeholder="Raccontaci brevemente il tuo percorso o interesse..." class="w-full px-3 py-2 bg-druid-card border border-druid-green/20 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-druid-sage"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-druid-green hover:bg-druid-darkGreen text-white font-bold rounded-lg transition-colors">
+                    Invia Richiesta
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-evento" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-druid-bg rounded-2xl max-w-lg w-full p-6 sm:p-8 border border-druid-green/20 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-evento')" class="absolute top-4 right-4 text-druid-textMuted hover:text-druid-darkGreen">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 id="modal-event-title" class="text-2xl font-cinzel font-bold text-druid-darkGreen">Nome Evento</h3>
+            <div class="space-y-1 text-xs text-druid-sage font-medium">
+                <p id="modal-event-date"><i class="fa-regular fa-calendar mr-1"></i> Data</p>
+                <p id="modal-event-loc"><i class="fa-solid fa-location-dot mr-1"></i> Luogo</p>
+            </div>
+            <p id="modal-event-desc" class="text-sm text-druid-textMuted leading-relaxed">
+                Descrizione dettagliata dell'evento...
+            </p>
+            <hr class="border-druid-green/10">
+            <h4 class="font-cinzel text-sm font-bold text-druid-darkGreen">Prenota la tua Partecipazione</h4>
+            <form onsubmit="handleFormSubmit(event, 'Prenotazione inviata! Ti invieremo le indicazioni esatte per il luogo di ritrovo via email.')" class="space-y-3">
+                <input type="text" placeholder="Il tuo nome" required class="w-full px-3 py-2 bg-druid-card border border-druid-green/20 rounded-lg text-sm">
+                <input type="email" placeholder="La tua email" required class="w-full px-3 py-2 bg-druid-card border border-druid-green/20 rounded-lg text-sm">
+                <button type="submit" class="w-full py-2.5 bg-druid-gold hover:bg-druid-goldHover text-druid-darkGreen font-bold rounded-lg text-sm transition-colors">
+                    Conferma Prenotazione
+                </button>
+            </form>
+        </div>
+    </div>
+
+    
+    <!-- JavaScript logic -->
+    <script>
+        // Mobile Navigation Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Modal Handlers
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Event Modal Dynamic Loader
+        function openEventModal(title, date, location, description) {
+            document.getElementById('modal-event-title').innerText = title;
+            document.getElementById('modal-event-date').innerHTML = `<i class="fa-regular fa-calendar mr-1"></i> ${date}`;
+            document.getElementById('modal-event-loc').innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i> ${location}`;
+            document.getElementById('modal-event-desc').innerText = description;
+            openModal('modal-evento');
+        }
+
+        // Filter Events by Tab
+        function filterEvents(category) {
+            const cards = document.querySelectorAll('.event-card');
+            const tabs = document.querySelectorAll('.event-tab');
+
+            tabs.forEach(t => {
+                t.classList.remove('bg-druid-green', 'text-white');
+                t.classList.add('text-druid-textMuted');
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.add('bg-druid-green', 'text-white');
+                activeTab.classList.remove('text-druid-textMuted');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Search Articles
+        function filterArticles() {
+            const query = document.getElementById('article-search').value.toLowerCase();
+            const items = document.querySelectorAll('.article-item');
+
+            items.forEach(item => {
+                const title = item.querySelector('.article-title').innerText.toLowerCase();
+                const content = item.querySelector('p').innerText.toLowerCase();
+                if (title.includes(query) || content.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+
+    </script>
+</body>
+</html>
